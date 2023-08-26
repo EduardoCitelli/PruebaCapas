@@ -10,6 +10,7 @@
         }
 
         public DbSet<Persona> Personas { get; set; }
+        public DbSet<ColorPiel> ColoresPiel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +45,18 @@
             modelBuilder.Entity<Persona>()
                         .Property(p => p.Nacionalidad)
                         .HasMaxLength(20);
+
+            modelBuilder.Entity<ColorPiel>()
+                        .HasKey(p => p.Id);
+
+            modelBuilder.Entity<ColorPiel>()
+                        .Property(p => p.Nombre)
+                        .IsRequired();
+
+            modelBuilder.Entity<Persona>()
+                        .HasOne(persona => persona.ColorPiel)
+                        .WithMany(colorPiel => colorPiel.Personas)
+                        .HasForeignKey(persona => persona.IdColorPiel);
         }
     }
 }

@@ -6,6 +6,10 @@
     {
         public int Id { get; set; }
 
+        public int IdColorPiel { get; set; }
+
+        public virtual ColorPiel ColorPiel { get; set; }
+
         public string Nombre { get; set; }
 
         public string Apellido { get; set; }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PruebaCapas.AccesoDatos;
 
@@ -11,9 +12,11 @@ using PruebaCapas.AccesoDatos;
 namespace PruebaCapas.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230819145347_AgregamosColorPiel")]
+    partial class AgregamosColorPiel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,25 +74,7 @@ namespace PruebaCapas.AccesoDatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdColorPiel");
-
                     b.ToTable("Personas");
-                });
-
-            modelBuilder.Entity("PruebaCapas.Modelos.Persona", b =>
-                {
-                    b.HasOne("PruebaCapas.Modelos.ColorPiel", "ColorPiel")
-                        .WithMany("Personas")
-                        .HasForeignKey("IdColorPiel")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ColorPiel");
-                });
-
-            modelBuilder.Entity("PruebaCapas.Modelos.ColorPiel", b =>
-                {
-                    b.Navigation("Personas");
                 });
 #pragma warning restore 612, 618
         }
