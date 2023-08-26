@@ -27,6 +27,7 @@ namespace PruebaCapas.Vista
             //vamos a configurar los servicios de la aplicación para inyectar
             //por dependencia
             builder.Services.AddScoped<IPersonasService, PersonasService>();
+            builder.Services.AddScoped<IColorPielService, ColorPielService>();
 
             var app = builder.Build();
 
