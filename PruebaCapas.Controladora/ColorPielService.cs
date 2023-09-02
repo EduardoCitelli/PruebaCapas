@@ -27,7 +27,12 @@
 
         public async Task<ColorPielDetalleDto> ObtenerPorId(int id)
         {
-            var colorPiel = await IntentarObtenerPorId(id);
+            var colorPiel = await _context.ColoresPiel.FindAsync(id);
+
+            if (colorPiel == null)
+            {
+                throw new Exception($"El color de piel con el id {id} no existe");
+            }
 
             return new ColorPielDetalleDto
             {
@@ -43,10 +48,11 @@
                 Nombre = dto.Nombre,
             };
 
-            var existeNombre = await _context.ColoresPiel.AnyAsync(x => x.Nombre == dto.Nombre);
+            var existeNombre = await _context.ColoresPiel
+                                             .AnyAsync(x => x.Nombre.ToLower() == dto.Nombre.ToLower());
 
             if (existeNombre)
-                throw new Exception($"El nombre {dto.Nombre} ya existe use otro chabon");
+                throw new Exception($"El nombre {dto.Nombre} ya existe usa otro chabon");
 
             await _context.AddAsync(entidad);
             await _context.SaveChangesAsync();

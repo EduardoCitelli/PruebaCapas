@@ -4,8 +4,7 @@
 
     public class ColorPielCrearDto
     {
-        [Required]
-        [MinLength(3)]
+        [Required(AllowEmptyStrings = false)]
         public string Nombre { get; set; }
     }
 }
