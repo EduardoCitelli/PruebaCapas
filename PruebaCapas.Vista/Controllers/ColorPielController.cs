@@ -37,7 +37,8 @@
         }
 
         [HttpPut("{id}")]
-        public async Task<ColorPielDetalleDto> Put([FromRoute] int id, [FromBody] ColorPielCrearDto dto)
+        public async Task<ColorPielDetalleDto> Put([FromRoute] int id, 
+                                                   [FromBody] ColorPielCrearDto dto)
         {
             var respuesta = await _colorPielService.Actualizar(id, dto);
             return respuesta;
